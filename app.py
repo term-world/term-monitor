@@ -1,5 +1,6 @@
 from flask import Flask
 import subprocess
+from daemonize import Daemonize
 
 app = Flask(__name__)
 
@@ -11,5 +12,11 @@ def home():
 def pm2():
     return subprocess.run(["pm2", "list"], capture_output=True).stdout
 
-if __name__ == "__main__":
+def main():
     app.run()
+
+if __name__ == "__main__":
+    myname = os.path.basename(sys.argv[0])
+    pidfile = '/tmp/%s' % myname  # any name
+    daemon = Daemonize(app=myname, pid=pidfile, action=main)
+    daemon.start()
