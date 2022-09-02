@@ -10,10 +10,9 @@ def home():
 
 @app.route("/pm2")
 def pm2():
-    return subprocess.run(["pm2", "list"], capture_output=True).stdout
+    return subprocess.run(["pm2", "list"], user="dluman", capture_output=True).stdout
 
 def main():
-    os.setuid("dluman")
     app.run("0.0.0.0")
 
 if __name__ == "__main__":
