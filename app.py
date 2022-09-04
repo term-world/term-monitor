@@ -20,7 +20,7 @@ def pm2():
 
 @app.route("/docker/list")
 def docker_ps():
-    return subprocess.run(["docker", "ps", "-a"])
+    return subprocess.run(["docker", "ps", "-a"], capture_output=True).stdout
 
 def main():
     app.run("0.0.0.0")
