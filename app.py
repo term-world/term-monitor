@@ -18,6 +18,10 @@ def pm2():
     return lines
     # return subprocess.run(["pm2", "logs", "--json", "--timestamp", "--nostream", "--lines", "50"], capture_output=True).stdout
 
+@app.route("/docker/list")
+def docker_ps():
+    return subprocess.run(["docker", "ps", "-a"])
+
 def main():
     app.run("0.0.0.0")
 
