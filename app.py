@@ -12,7 +12,7 @@ def home():
 def pm2():
     n = 50
     proc = subprocess.run(['tail', "../.pm2/pm2.log", '-n', str(n), ], capture_output=True).stdout
-    lines = proc.readlines()
+    lines = proc
     return lines
     # return subprocess.run(["pm2", "logs", "--json", "--timestamp", "--nostream", "--lines", "50"], capture_output=True).stdout
 
