@@ -13,9 +13,9 @@ def pm2():
     length = 50
     with open('../.pm2/pm2.log', 'rb') as f:
         try:  # catch OSError in case of a one line file
-            f.seek(-2 - length, os.SEEK_END)
+            f.seek(-2, os.SEEK_END)
             while f.read(1) != b'\n':
-                f.seek(-2, os.SEEK_CUR)
+                f.seek(-2- length, os.SEEK_CUR)
         except OSError:
             f.seek(0)
         last_line = f.readline().decode()
