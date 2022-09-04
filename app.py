@@ -21,8 +21,7 @@ def pm2():
 @app.route("/docker/list")
 def docker_ps():
     proc = subprocess.run(["docker", "ps", "-a"], capture_output=True).stdout
-    print(repr(proc))
-    return proc
+    return proc.decode("utf-8")
 
 def main():
     app.run("0.0.0.0")
