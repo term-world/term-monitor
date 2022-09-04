@@ -10,7 +10,7 @@ def home():
 
 @app.route("/pm2")
 def pm2():
-    return subprocess.run(["pm2", "list"], user="dluman", capture_output=True).stdout
+    return subprocess.run(["pm2", "logs", "--json", "--timestamp", "--nostream", "--lines", "50"], user="dluman", capture_output=True).stdout
 
 def main():
     app.run("0.0.0.0")
