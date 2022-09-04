@@ -1,6 +1,6 @@
 from flask import Flask
 import subprocess
-import os
+import os, io
 
 app = Flask(__name__)
 
@@ -11,8 +11,10 @@ def home():
 @app.route("/pm2")
 def pm2():
     n = 50
-    proc = subprocess.run(['tail', "../.pm2/pm2.log", '-n', str(n), ], capture_output=True).stdout
-    lines = proc
+    proc = subprocess.Popen(['tail', "../.pm2/pm2.log", '-n', str(n), ], stdout=subprocess.PIPE)
+    lines = []
+    for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):  # or another encoding
+        lines.append(line)
     return lines
     # return subprocess.run(["pm2", "logs", "--json", "--timestamp", "--nostream", "--lines", "50"], capture_output=True).stdout
 
